@@ -1,47 +1,33 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+  import UserAuth from './components/UserAuth.svelte';
+  import GroupManagement from './components/GroupManagement.svelte';
+  import ScoringSession from './components/ScoringSession.svelte';
+  import ScoreInput from './components/ScoreInput.svelte';
+  import ScoreDisplay from './components/ScoreDisplay.svelte';
+  import ReportGeneration from './components/ReportGeneration.svelte';
+
+  // ここに必要なロジックを追加
+  let isLoggedIn = false; // 例: ログイン状態を管理する変数
 </script>
 
 <main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
+  <h1>スコアリングアプリ</h1>
 
-  <div class="card">
-    <Counter />
-  </div>
+  {#if !isLoggedIn}
+    <UserAuth />
+  {:else}
+    <nav>
+      <!-- ナビゲーションメニューなど -->
+    </nav>
 
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
+    <GroupManagement />
+    <ScoringSession />
+    <ScoreInput />
+    <ScoreDisplay />
+    <ReportGeneration />
+  {/if}
 </main>
 
 <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
+  /* スタイルをここに追加 */
 </style>
