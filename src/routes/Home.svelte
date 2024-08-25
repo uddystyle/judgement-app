@@ -81,24 +81,6 @@
     margin-bottom: 40px;
   }
 
-  .button {
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s;
-  }
-
-  .primary {
-    background-color: #4caf50;
-    color: white;
-  }
-
-  .secondary {
-    background-color: #008cba;
-    color: white;
-  }
-
   .features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

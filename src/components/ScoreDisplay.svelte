@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import type { Score } from "../types/Score";
 
-  // プロパティの定義
+  // def property
   export let scores: Score[] = [];
   export let judgesCount: number = 5;
   export let scoresUsed: number = 3;
@@ -11,7 +11,7 @@
   let sortColumn: keyof Score = "round";
   let sortDirection: "asc" | "desc" = "asc";
 
-  // スコアの計算関数
+  // calculate Score
   function calculateScore(scores: Score[]): number {
     if (scores.length < judgesCount) {
       return 0;
@@ -20,7 +20,7 @@
     const sortedScores = scores.map((s) => s.value).sort((a, b) => b - a);
     const usedScores = sortedScores.slice(
       (judgesCount - scoresUsed) / 2,
-      judgesCount - (judgesCount - scoresUsed) / 2
+      judgesCount - (judgesCount - scoresUsed) / 2,
     );
 
     return usedScores.reduce((sum, score) => sum + score, 0) / scoresUsed;
@@ -41,42 +41,42 @@
     });
   }
 
-  // コンポーネントがマウントされたときに実行
+  // run when component is mounted
   onMount(() => {
     averageScore = calculateScore(scores);
   });
 
-  // スコアが変更されたときに再計算
+  // Recalculate when score changes
   $: averageScore = calculateScore(scores);
 
-  // ユニークなキーを生成する関数
+  // function to generate unique keys
   function generateKey(score: Score, index: number): string {
     return `${score.userId}-${score.round}-${index}`;
   }
 </script>
 
 <div class="score-display">
-  <h2>スコア表示</h2>
+  <h2>Display Score</h2>
 
   <table>
     <thead>
       <tr>
         <th on:click={() => sortScores("round")}>
-          ラウンド {sortColumn === "round"
+          Round {sortColumn === "round"
             ? sortDirection === "asc"
               ? "▲"
               : "▼"
             : ""}
         </th>
         <th on:click={() => sortScores("username")}>
-          ユーザー名 {sortColumn === "username"
+          User name {sortColumn === "username"
             ? sortDirection === "asc"
               ? "▲"
               : "▼"
             : ""}
         </th>
         <th on:click={() => sortScores("value")}>
-          スコア {sortColumn === "value"
+          Score {sortColumn === "value"
             ? sortDirection === "asc"
               ? "▲"
               : "▼"
@@ -96,7 +96,7 @@
   </table>
 
   <div class="average-score">
-    <h3>平均スコア: {averageScore.toFixed(2)}</h3>
+    <h3>Averaee Score: {averageScore.toFixed(2)}</h3>
     <p>※ {judgesCount}審{scoresUsed}採で計算</p>
   </div>
 </div>
